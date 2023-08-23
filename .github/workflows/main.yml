@@ -74,10 +74,4 @@ jobs:
           images: fabricioveronez/api-bootcamp-produto:${{github.run_number}}
           manifests: |
             k8s/api/deployment.yaml
-          
-                
-      
-    
-    
-      
 
