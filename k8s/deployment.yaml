@@ -20,7 +20,7 @@ spec:
             - name: MONGO_INITDB_ROOT_USERNAME
               value: mongouser
             - name: MONGO_INITDB_ROOT_PASSWORD
-              value: mongopwd         
+              value: mongopwd
 ---
 apiVersion: v1
 kind: Service
@@ -44,23 +44,23 @@ spec:
     matchLabels:
       app: api
   template:
-    metadata:  
+    metadata:
       annotations:
         prometheus.io/scrape: "true"
         prometheus.io/path: /metrics
-        prometheus.io/port: "8080"        
+        prometheus.io/port: "8080"
       labels:
         app: api
     spec:
       containers:
         - name: api
-          image: fabricioveronez/api-produto:{{tag}}
-          ports: 
-          - containerPort: 8080
-          env: 
-          - name: MONGODB_URI
-            value: mongodb://mongouser:mongopwd@mongodb-service:27017/admin
---- 
+          image: thinogueiras/api-product:{{tag}}
+          ports:
+            - containerPort: 8080
+          env:
+            - name: MONGODB_URI
+              value: mongodb://mongouser:mongopwd@mongodb-service:27017/admin
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -70,7 +70,6 @@ spec:
     app: api
   ports:
     - port: 80
-      targetPort: 8080   
-      nodePort: 30000   
+      targetPort: 8080
+      nodePort: 30000
   type: LoadBalancer
-
